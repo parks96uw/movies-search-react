@@ -2,8 +2,8 @@ import React from 'react';
 
 import SearchBar from './SearchBar';
 import MovieList from './MovieList';
-import tmdb from './tmdb';
-import './App.css';
+import tmdb from '../api/tmdb';
+import '../css/App.css';
 
 
 // DEF: Access key
@@ -35,7 +35,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="search-bar ui container">
+            <div className="ui container">
                 <SearchBar onFormSubmit={this.onFormSubmit} />
                 <MovieList movies={this.state.movies} />
             </div>

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../css/SearchBar.css';
+
 class SearchBar extends React.Component {
     state = {
         term: ''
@@ -19,7 +21,7 @@ class SearchBar extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="search-bar-container">
                 <form onSubmit={this.onFormSubmit} className="ui form">
                     <div className="input-bar">
                         <input 
