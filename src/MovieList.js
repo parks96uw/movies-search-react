@@ -3,13 +3,14 @@ import React from 'react';
 import MovieItem from './MovieItem';
 
 const MovieList = ({ movies }) => {
-    console.log(movies);
     const renderedList = movies.map((movie) => {
         return <MovieItem key={movie.id} movie={movie}/>;
     })
 
+    // TODO: Add a loader / spinner while returning list of movies
+
     return ( 
-        <div className="ui divided items">{renderedList}</div>
+        <div className="ui link cards">{renderedList}</div>
     )
 }
 

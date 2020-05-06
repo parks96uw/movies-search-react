@@ -22,7 +22,9 @@ class App extends React.Component {
         const response = await tmdb.get('/search/movie', {
             params: {
                 api_key: process.env.REACT_APP_API_KEY,
-                query: term
+                query: term,
+                language: "EN",
+                include_adult: false
             }
         })
 
