@@ -3,15 +3,21 @@ import React from 'react';
 import SearchBar from './SearchBar';
 import MovieList from './MovieList';
 import tmdb from './tmdb';
+import './App.css';
+
 
 // DEF: Access key
 require('dotenv').config();
 
 class App extends React.Component {
     state = ({
-        movies: []
+        movies: [],
+        pageNumber: 1
     })
 
+
+    // TODO: Pagination -- flipping between results of movies
+    //       Needs to take in parameter of page number
     onFormSubmit = async (term) => {
         const response = await tmdb.get('/search/movie', {
             params: {
@@ -27,9 +33,9 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="ui container">
-                <SearchBar onFormSubmit={this.onFormSubmit}/>
-                <MovieList movies={this.state.movies}/>
+            <div className="search-bar ui container">
+                <SearchBar onFormSubmit={this.onFormSubmit} />
+                <MovieList movies={this.state.movies} />
             </div>
         )
     }
