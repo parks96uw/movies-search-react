@@ -9,7 +9,6 @@ const MovieItem = ({ movie }) => {
     const imagePath = !movie.poster_path ? logo : "https://image.tmdb.org/t/p/w342/" + movie.poster_path;
 
     // TODO: Add to cart logic
-
     return (
         <div className="card">
             <div className="image">

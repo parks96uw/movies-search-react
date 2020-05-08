@@ -18,13 +18,17 @@ class App extends React.Component {
 
     // TODO: Pagination -- flipping between results of movies
     //       Needs to take in parameter of page number
+    //       Revise the GET request -- needs to take into account pages returned
+    //       Default page to begin on -- PAGE 1
+    //       Set default on APP -- callback on movielist to return new page number
     onFormSubmit = async (term) => {
         const response = await tmdb.get('/search/movie', {
             params: {
                 api_key: process.env.REACT_APP_API_KEY,
                 query: term,
                 language: "EN",
-                include_adult: false
+                include_adult: false,
+                page: this.pageNumber // revisit here
             }
         })
 

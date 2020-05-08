@@ -8,7 +8,6 @@ const MovieList = ({ movies }) => {
     });
 
     // TODO: Add a loader / spinner while returning list of movies
-
     return ( 
         <div className="movie-list ui four doubling cards">{renderedList}</div>
     )
