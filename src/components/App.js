@@ -5,6 +5,7 @@ import MovieList from './MovieList';
 import tmdb from '../api/tmdb';
 import '../css/App.css';
 
+import Pagination from "react-js-pagination";
 
 // DEF: Access key
 require('dotenv').config();
@@ -12,48 +13,61 @@ require('dotenv').config();
 class App extends React.Component {
     state = ({
         movies: [],
-        pageNumber: 1,
-        term: ''
+        term: '',
+        activePage: 1,
+        totalPages: 0,
+        itemsPerPage: 20
     })
 
-
-    // TODO: Pagination -- flipping between results of movies
-    //       Needs to take in parameter of page number
-    //       Revise the GET request -- needs to take into account pages returned
-    //       Default page to begin on -- PAGE 1
-    //       Set default on APP -- callback on movielist to return new page number
-    //       Page items is set to 20 by default
-    onFormSubmit = async (term, pageNum) => {
+    onFormSubmit = async (term, page) => {
         const response = await tmdb.get('/search/movie', {
             params: {
                 api_key: process.env.REACT_APP_API_KEY,
                 query: term,
                 language: "EN",
                 include_adult: false,
-                page: pageNum // revisit here
+                page: page
             }
         })
 
         this.setState({
             movies: response.data.results,
-            term: term
+            term: term,
+            totalPages: response.data.total_results,
+            activePage: page
         });
     }
 
+    // DEF: Update the currently viewed page on MovieList
+    //      Also fetch the next page's results
+    // TODO: Revise comment. Note: the setState asychronous request
     onPageChange = (page) => {
-        const currPage = this.state.pageNumber;
-        this.setState({
-            pageNumber: page + currPage
-        });
-
-        this.onFormSubmit(this.state.term, this.pageNumber);
+        this.setState({activePage: page});
+        this.onFormSubmit(this.state.term, page);
     }
 
+    // TODO: Revise comment
+    //       Pagination will show when we have results > 0
     render() {
         return (
             <div className="ui container">
-                <SearchBar onFormSubmit={this.onFormSubmit} />
-                <MovieList onPageChange={this.onPageChange} term={this.state.term} movies={this.state.movies} />
+                <SearchBar 
+                    onFormSubmit={this.onFormSubmit} 
+                />
+                {this.state.totalPages > 0 && <Pagination
+                    itemClass="page-item"
+                    linkClass="page-link"
+                    innerClass="pagination justify-content-end"
+                    activePage={this.state.activePage}
+                    itemsCountPerPage={this.state.itemsPerPage}
+                    totalItemsCount={this.state.totalPages}
+                    onChange={this.onPageChange.bind(this)}
+                />}
+                <MovieList 
+                    onPageChange={this.onPageChange} 
+                    term={this.state.term} 
+                    movies={this.state.movies} 
+                />
             </div>
         )
     }

@@ -9,9 +9,10 @@ class SearchBar extends React.Component {
 
     // DEF: Prevent the form from submitting the page
     //      Callback to the App component passing up the term value entered on search
+    //      Default page number to be 1
     onFormSubmit = (event) => {
         event.preventDefault();
-        this.props.onFormSubmit(this.state.term);
+        this.props.onFormSubmit(this.state.term, 1);
     }
 
     // DEF: Update the state when there is a change in input
@@ -24,7 +25,7 @@ class SearchBar extends React.Component {
             <div className="search-bar-container">
                 <form onSubmit={this.onFormSubmit} className="ui form">
                     <div className="input-bar">
-                        <input 
+                        <input
                             type="text"
                             value={this.state.term}
                             onChange={(e) => this.onTermSubmit(e)}
