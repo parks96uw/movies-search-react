@@ -52,6 +52,11 @@ class App extends React.Component {
     //      Should have ability to delete movie
     //      Cart should automatically render upon loading page
     // Store cart information in movie
+    componentDidMount() {
+        // Search for the cart information based on localStorage information
+        // Grab the localStorage
+        // Ping the API with list of movies?
+    }
 
     // TODO: Revise comment
     //       Pagination will show when we have results > 0
