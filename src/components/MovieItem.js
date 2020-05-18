@@ -16,7 +16,7 @@ const MovieItem = ({ movie }) => {
             </div>
             <div className="content">
                 <div className="header">
-                    <h2 className="movie-title">{movie.title}</h2>
+                    <h4 className="movie-title">{movie.title}</h4>
                     <button className="movie-add ui basic button">Add to Cart</button>
                 </div>
             </div>
