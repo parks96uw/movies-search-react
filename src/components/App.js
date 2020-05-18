@@ -2,6 +2,7 @@ import React from 'react';
 
 import SearchBar from './SearchBar';
 import MovieList from './MovieList';
+import Cart from './Cart';
 import tmdb from '../api/tmdb';
 import '../css/App.css';
 
@@ -46,6 +47,12 @@ class App extends React.Component {
         this.onFormSubmit(this.state.term, page);
     }
 
+    // DEF: Cart information
+    //      Check local storage if added
+    //      Should have ability to delete movie
+    //      Cart should automatically render upon loading page
+    // Store cart information in movie
+
     // TODO: Revise comment
     //       Pagination will show when we have results > 0
     render() {
@@ -53,7 +60,7 @@ class App extends React.Component {
             <div className="ui container">
                 <SearchBar 
                     onFormSubmit={this.onFormSubmit} 
-                />
+                <Cart/>
                 {this.state.totalPages > 0 && <Pagination
                     itemClass="page-item"
                     linkClass="page-link"
