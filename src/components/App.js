@@ -60,6 +60,7 @@ class App extends React.Component {
             <div className="ui container">
                 <SearchBar 
                     onFormSubmit={this.onFormSubmit} 
+                />
                 <Cart/>
                 {this.state.totalPages > 0 && <Pagination
                     itemClass="page-item"
